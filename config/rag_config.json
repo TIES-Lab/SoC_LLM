@@ -1,0 +1,14 @@
+{
+  "model_dir": "model/deepseek_finetuned",
+  "input_code_file": "input/code.txt",
+  "output_file": "outputs/rag_output.txt",
+  "rag_sources_file": "input/rag_sources.txt",
+  "top_k": 5,
+  "chunk_chars": 1800,
+  "chunk_overlap": 250,
+  "max_context_chars": 7000,
+  "max_html_pages_per_url": 20,
+  "max_new_tokens": 2048,
+  "temperature": 0.7,
+  "top_p": 0.9
+}

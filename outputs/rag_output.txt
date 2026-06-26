@@ -1,0 +1,25 @@
+Here is the requested property 
+
+ property WriteSynceotid; ( psel & penable & pwrite ) |-> wr_trans_vld ; endproperty 
+ 
+ property ReadSynceotid; ( psel & penable & ~pwrite ) |-> rd_trans_vld ; endproperty 
+ 
+ property SafeTranseotid; @(posedge pclk or negedge prstn)  (  !prstn ) |-> rd_trans_low == 1'b0 ; endproperty 
+ 
+ property ResetSafeeotid; @(posedge pclk or negedge prstn)  (  !prstn )  |-> rd_trans_low == 1'b0 ; endproperty 
+ 
+ property ValidTranseotid; @(posedge pclk or negedge prstn)  (  !prstn ) && ( nvdla2csb_valid & rd_trans_low ) |-> rd_trans_low == 1'b0 ; endproperty 
+ 
+ property DataValideotid; @(posedge pclk or negedge prstn)  (  !prstn )  &&  ( !( nvdla2csb_valid & rd_trans_low ) & ( csb2nvdla_ready & rd_trans_vld ) )  |-> rd_trans_low == 1'b1 ; endproperty 
+ 
+ property ValidDataeotid;  (  wr_trans_vld | rd_trans_vld & ~rd_trans_low ) |-> csb2nvdla_valid ; endproperty 
+ 
+ property WriteDataeotid;  (  wr_trans_vld | rd_trans_vld & ~rd_trans_low ) |-> csb2nvdla_addr == paddr[17:2] ; endproperty 
+ 
+ property WriteDataeotid;  (  wr_trans_vld | rd_trans_vld & ~rd_trans_low ) |-> csb2nvdla_wdat == pwdata[31:0] ; endproperty 
+ 
+ property WriteDataeotid;  (  wr_trans_vld | rd_trans_vld & ~rd_trans_low ) |-> csb2nvdla_write == pwrite; endproperty 
+ 
+ property WriteDataeotid;  (  wr_trans_vld | rd_trans_vld & ~rd_trans_low ) |-> csb2nvdla_nposted == 1'b0; endproperty 
+ 
+ property SafeDataeotid;  (  rd_trans_vld & ~nvdla2csb_valid | rd_trans_vld & ~csb2nvdla_ready ) |-> pready ; endproperty
