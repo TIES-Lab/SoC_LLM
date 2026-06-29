@@ -1,4 +1,4 @@
-# DeepSeek RAG Demo
+# VERT DeepSeek Demo
 
 This demo runs a fine-tuned DeepSeek model with RAG context from local files, JSON datasets, Markdown/text files, HTML files, and web pages.
 
